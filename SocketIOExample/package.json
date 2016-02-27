@@ -1,0 +1,10 @@
+{
+  "name": "SocketIOExample",
+  "version": "0.0.1",
+  "description": "Chat app Socket.IO example",
+  "dependencies": {
+    "express": "latest",
+    "socket.io": "latest"
+  },
+  "author": "Keith Banner"
+}
