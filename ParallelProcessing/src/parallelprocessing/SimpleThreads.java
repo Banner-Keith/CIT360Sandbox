@@ -18,23 +18,25 @@ public class SimpleThreads extends Thread {
 
     @Override
     public void run() {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < numberOfRounds; i++) {
+            sb.setLength(0);
             //System.out.println(Thread.currentThread().getName() + ", round " + (i + 1) + " has started");
             for (int j = 0; j < numberOfRounds; j++) {
                 if (j == i) {
-                    System.out.print(Thread.currentThread().getName().charAt(Thread.currentThread().getName().length() - 1));
+                    sb.append(Thread.currentThread().getName().charAt(Thread.currentThread().getName().length() - 1));
                 } else {
-                    System.out.print("-");
+                    sb.append('-');
                 }
             }
-            System.out.println("");
+            System.out.println(sb.toString());
             int sleepTime = 1 + (int) (Math.random() * 100);
             try {
                 Thread.currentThread().sleep(sleepTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //System.out.println(Thread.currentThread().getName() + ", round " + (i + 1) + " has finished.");
+            
             if (i == numberOfRounds - 1 && winner.equals("")) {
                 winner = Thread.currentThread().getName();
             }
