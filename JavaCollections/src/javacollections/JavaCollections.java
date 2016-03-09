@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -36,7 +33,7 @@ public class JavaCollections {
     // Collection accessed by array. Can be sorted.
     public static void arrayList() {
 
-        List arrayList = new ArrayList();
+        ArrayList<String> arrayList = new ArrayList<>();
         
         arrayList.add("al 1");
         arrayList.add("al 2");
@@ -51,7 +48,7 @@ public class JavaCollections {
     // Collection where object can only be added once
     // objects are sorted.
     public static void treeSet() {
-        Set treeSet = new TreeSet();
+        TreeSet<String> treeSet = new TreeSet<>();
 
         treeSet.add("ts 1");
         treeSet.add("ts 2");
@@ -66,7 +63,7 @@ public class JavaCollections {
     // Unsorted collection. Objects added any number of times.
     // FIFO push and pop methods to add and remove.
     public static void linkedList() {
-        List linkedList = new LinkedList();
+        LinkedList<String> linkedList = new LinkedList<>();
         
         linkedList.add("ll 1");
         linkedList.add("ll 2");
@@ -80,7 +77,7 @@ public class JavaCollections {
 
     // 
     public static void hashSet() {
-        Set hashSet = new HashSet();
+        HashSet<String> hashSet = new HashSet<>();
 
         hashSet.add("hs 1");
         hashSet.add("hs 2");
@@ -95,7 +92,7 @@ public class JavaCollections {
     // Unsorted key/value pairs. Key used to get value.
     // put and get. List of all values, not in order.
     public static void hashMap() {
-        Map<String, Item> employeeHashMap = new HashMap<>();
+        HashMap<String, Item> employeeHashMap = new HashMap<>();
         
         employeeHashMap.put("flour", new Item(1, "Flour", "", 1.00, 1, 1));
         employeeHashMap.put("eggs", new Item(2, "Dozen Eggs", "", 2.20, 6, 1));
@@ -112,7 +109,7 @@ public class JavaCollections {
     // Methods to get keys in order:
     // firstKey, higherKey, lastKey, lowerKey
     public static void treeMap() {
-        Map treeMap = new TreeMap();
+        TreeMap<String, Object> treeMap = new TreeMap<>();
         
         treeMap.put("tm 1", 1);
         treeMap.put("tm 2", 2);
