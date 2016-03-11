@@ -5,32 +5,35 @@ import java.util.Objects;
 public class Item {
 
     private int id;
-    private String itemName;
+    private String name;
     private String notes;
     private double price;
     private double quantity;
+    private GroceryCategory groceryCategory;
     private int recipeKey;
 
     public Item() {
     }
 
     // Constructor for creating item with no recipe foreign key.
-    public Item(int id, String itemName, String notes, double price, double quantity) {
+    public Item(int id, String itemName, String notes, double price, double quantity, GroceryCategory groceryCategory) {
         this.id = id;
-        this.itemName = itemName;
+        this.name = itemName;
         this.notes = notes;
         this.price = price;
         this.quantity = quantity;
+        this.groceryCategory = groceryCategory;
         this.recipeKey = 0;
     }
 
     // Constructor for creating item with recipe foreign key
-    public Item(int id, String itemName, String notes, double price, double quantity, int recipeKey) {
+    public Item(int id, String itemName, String notes, double price, double quantity, GroceryCategory groceryCategory, int recipeKey) {
         this.id = id;
-        this.itemName = itemName;
+        this.name = itemName;
         this.notes = notes;
         this.price = price;
         this.quantity = quantity;
+        this.groceryCategory = groceryCategory;
         this.recipeKey = recipeKey;
     }
 
@@ -38,8 +41,8 @@ public class Item {
         return id;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getName() {
+        return name;
     }
 
     public String getNotes() {
@@ -57,13 +60,17 @@ public class Item {
     public int getRecipeKey() {
         return recipeKey;
     }
+    
+    public GroceryCategory getGroceryCategory() {
+        return groceryCategory;
+    }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setNotes(String notes) {
@@ -77,6 +84,10 @@ public class Item {
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
+    
+    public void setGroceryCategory(GroceryCategory groceryCategory) {
+        this.groceryCategory = groceryCategory;
+    }
 
     public void setRecipeKey(int recipeKey) {
         this.recipeKey = recipeKey;
@@ -84,13 +95,14 @@ public class Item {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + this.id;
-        hash = 47 * hash + Objects.hashCode(this.itemName);
-        hash = 47 * hash + Objects.hashCode(this.notes);
-        hash = 47 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
-        hash = 47 * hash + (int) (Double.doubleToLongBits(this.quantity) ^ (Double.doubleToLongBits(this.quantity) >>> 32));
-        hash = 47 * hash + this.recipeKey;
+        int hash = 7;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Objects.hashCode(this.notes);
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.quantity) ^ (Double.doubleToLongBits(this.quantity) >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.groceryCategory);
+        hash = 37 * hash + this.recipeKey;
         return hash;
     }
 
@@ -106,7 +118,7 @@ public class Item {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.itemName, other.itemName)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         if (!Objects.equals(this.notes, other.notes)) {
@@ -118,6 +130,9 @@ public class Item {
         if (Double.doubleToLongBits(this.quantity) != Double.doubleToLongBits(other.quantity)) {
             return false;
         }
+        if (this.groceryCategory != other.groceryCategory) {
+            return false;
+        }
         if (this.recipeKey != other.recipeKey) {
             return false;
         }
@@ -126,6 +141,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", itemName=" + itemName + ", notes=" + notes + ", price=" + price + ", quantity=" + quantity + ", recipeKey=" + recipeKey + '}';
+        return "Item{" + "id=" + id + ", itemName=" + name + ", notes=" + notes + ", price=" + price + ", quantity=" + quantity + ", groceryCategory=" + groceryCategory + ", recipeKey=" + recipeKey + '}';
     }
 }
