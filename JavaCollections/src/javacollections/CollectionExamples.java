@@ -7,7 +7,6 @@ package javacollections;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -32,27 +31,36 @@ public class CollectionExamples {
     // ArrayList works great in situations where random access is needed.
     // You can specify a particular item by it's index and access it directly.
     public void arrayList() {
-        ArrayList<Item> arrayList = new ArrayList<>();
+        ArrayList<Item> itemArrayList = new ArrayList<>();
 
-        arrayList.add(flour);           //Index 0
-        arrayList.add(eggs);            //Index 1
-        arrayList.add(milk);            //Index 2
-        arrayList.add(chocolateChips);  //Index 3
+        itemArrayList.add(flour);           //Index 0
+        itemArrayList.add(eggs);            //Index 1
+        itemArrayList.add(milk);            //Index 2
+        itemArrayList.add(chocolateChips);  //Index 3
 
-        printArrayList(arrayList, "ArrayList contents before sort by item name:");
+        //Example of sorting---------------------------------------------------------------------------
+        System.out.println("ArrayList contents before sort by item name:");
+        printArrayList(itemArrayList);
         
-        arrayList.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        //Sorts the list by the name of the item.
+        itemArrayList.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
 
-        printArrayList(arrayList, "ArrayList contents after sort by item name:");
+        System.out.println("ArrayList contents after sort by item name:");
+        printArrayList(itemArrayList);
         
-        arrayList.sort((o1, o2) -> o1.getGroceryCategory().getId() - o2.getGroceryCategory().getId());
+        //Sorts the list by the id # of the grocery category.
+        itemArrayList.sort((o1, o2) -> o1.getGroceryCategory().getId() - o2.getGroceryCategory().getId());
 
-        printArrayList(arrayList, "ArrayList contents after sort by item name:");
+        System.out.println("ArrayList contents after sort by item name:");
+        printArrayList(itemArrayList);
+        
         
         System.out.println();
     }
     
-    private void printArrayList(ArrayList<Item> arrayList, String message) {
+    //Method used above to print out the item name and grocery category name
+    //from the itemArrayList above.
+    private void printArrayList(ArrayList<Item> arrayList) {
         sb.setLength(0);
         sb.append("[ ");
         arrayList.stream().forEach((item) -> {
@@ -60,8 +68,6 @@ public class CollectionExamples {
         });
         sb.delete(sb.length() - 2, sb.length() - 1);
         sb.append(" ]");
-        
-        System.out.println(message);
         System.out.println(sb.toString());
     }
 

@@ -3,3 +3,19 @@
 /JUnitTests/build/
 /JUnitTests/nbproject/private/
 /Json/nbproject/private/
+/JavaCollections/nbproject/private/
+*.suo
+*.cache
+*.iml
+/JavaCollections/build/
+/Hibernate/nbproject/private/
+/CIT360-master/nbproject/private/
+/CIT360 Example/nbproject/private/
+/Hibernate/build/
+/WebApplication1/nbproject/private/
+/Hibernate/src/hibernate/storedata/hibernate.cfg.xml
+/Hibernate/src/hibernate.cfg.xml
+/PhpProject1/nbproject/private/
+/ParallelProcessing/nbproject/private/
+/ParallelProcessing/build/
+/ParallelProcessing/dist/
