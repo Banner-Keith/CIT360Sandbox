@@ -18,14 +18,14 @@ import static javacollections.GroceryCategory.GENERAL;
  * @author Keith
  */
 public class CollectionExamples {
-    StringBuilder sb = new StringBuilder();
-
+    ItemCollection itemCollection = new ItemCollection();
+    
     //Four items created for use in these collection examples
     //Item(int id, String itemName, String notes, double price, double quantity, GroceryCategory groceryCategory, int recipeKey)
-    Item flour = new Item(1, "Flour", "", 1.00, 1, GENERAL, 1);
-    Item eggs = new Item(2, "Eggs", "", 2.20, 6, DAIRY, 1);
-    Item milk = new Item(3, "Milk", "Buy at Walmart", 2.00, 1, DAIRY, 1);
-    Item chocolateChips = new Item(4, "Chocolate Chips", "", 3.50, 2, GENERAL, 1);
+    Item flour = new Item(0, "Flour", "", 1.00, 1, GENERAL, 1);
+    Item eggs = new Item(1, "Eggs", "", 2.20, 6, DAIRY, 1);
+    Item milk = new Item(2, "Milk", "Buy at Walmart", 2.00, 1, DAIRY, 1);
+    Item chocolateChips = new Item(3, "Chocolate Chips", "", 3.50, 2, GENERAL, 1);
 
     // Collection accessed like array. Can be sorted.
     // ArrayList works great in situations where random access is needed.
@@ -39,36 +39,22 @@ public class CollectionExamples {
         itemArrayList.add(chocolateChips);  //Index 3
 
         //Example of sorting---------------------------------------------------------------------------
-        System.out.println("ArrayList contents before sort by item name:");
-        printArrayList(itemArrayList);
+        System.out.println("ArrayList contents before sort by item name:"
+                + itemCollection.ToString(itemArrayList));
         
-        //Sorts the list by the name of the item.
-        itemArrayList.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        System.out.println("Sorting ArrayList by item name.");
+        itemArrayList.sort(new ItemNameComp());
 
-        System.out.println("ArrayList contents after sort by item name:");
-        printArrayList(itemArrayList);
+        System.out.println("ArrayList contents after sort by item name:"
+                + itemCollection.ToString(itemArrayList));
         
-        //Sorts the list by the id # of the grocery category.
-        itemArrayList.sort((o1, o2) -> o1.getGroceryCategory().getId() - o2.getGroceryCategory().getId());
+        System.out.println("Sorting ArrayList by grocery category.");
+        itemArrayList.sort(new ItemGroceryCategoryComp());
 
-        System.out.println("ArrayList contents after sort by item name:");
-        printArrayList(itemArrayList);
-        
+        System.out.println("ArrayList contents after sort by grocery category:"
+                + itemCollection.ToString(itemArrayList));
         
         System.out.println();
-    }
-    
-    //Method used above to print out the item name and grocery category name
-    //from the itemArrayList above.
-    private void printArrayList(ArrayList<Item> arrayList) {
-        sb.setLength(0);
-        sb.append("[ ");
-        arrayList.stream().forEach((item) -> {
-            sb.append(item.getName()).append(":").append(item.getGroceryCategory().getName()).append(", ");
-        });
-        sb.delete(sb.length() - 2, sb.length() - 1);
-        sb.append(" ]");
-        System.out.println(sb.toString());
     }
 
     // Unsorted collection. Objects added any number of times.
@@ -76,28 +62,60 @@ public class CollectionExamples {
     public void linkedList() {
         LinkedList<Item> linkedList = new LinkedList<>();
 
+        System.out.println("Items inserted into LinkedList: flour, eggs, milk, chocolateChips");
+        
         linkedList.add(flour);
         linkedList.add(eggs);
         linkedList.add(milk);
         linkedList.add(chocolateChips);
 
-        System.out.println("LinkedList Contents:");
-        System.out.println(linkedList);
+        System.out.println("LinkedList Contents:"
+                + itemCollection.ToString(linkedList));
+        
+        System.out.println("Remove Milk from list");
+        linkedList.remove(milk);
+        
+        System.out.println("LinkedList Contents:"
+                + itemCollection.ToString(linkedList));
+        
         System.out.println();
     }
 
     // Collection where object can only be added once
     // objects are sorted.
     public void treeSet() {
-        TreeSet<Item> treeSet = new TreeSet<>();
+        //TreeSet that is automatically ordered by item name.
+        TreeSet<Item> treeSetName = new TreeSet<>(new ItemNameComp());
 
-        treeSet.add(flour);
-        treeSet.add(eggs);
-        treeSet.add(milk);
-        treeSet.add(chocolateChips);
+        System.out.println("Example of treeSet that is ordered on the item name");
+        System.out.println("Items inserted into TreeSetName: flour, eggs, milk, chocolateChips");
+        
+        treeSetName.add(flour);
+        treeSetName.add(eggs);
+        treeSetName.add(milk);
+        treeSetName.add(chocolateChips);
 
-        System.out.println("TreeSet Contents:");
-        System.out.println(treeSet);
+        System.out.println("TreeSetName Contents:"
+                + itemCollection.ToString(treeSetName));
+        System.out.println(((TreeSet) treeSetName).comparator());
+        
+        //TreeSet that is automatically ordered by item name.
+        TreeSet<Item> treeSetId = new TreeSet<>(new ItemIdComp());
+        
+        System.out.println();
+        
+        System.out.println("Example of treeSet that is ordered on the item ID");
+        System.out.println("Items inserted into TreeSetId: flour:0, milk:2, eggs:1, chocolateChips:3");
+        
+        treeSetId.add(flour);
+        treeSetId.add(milk);
+        treeSetId.add(eggs);
+        treeSetId.add(chocolateChips);
+
+        System.out.println("TreeSetId Contents:"
+                + itemCollection.ToString(treeSetId));
+        System.out.println(((TreeSet) treeSetId).comparator());
+        
         System.out.println();
     }
 
@@ -109,9 +127,24 @@ public class CollectionExamples {
         hashSet.add(eggs);
         hashSet.add(milk);
         hashSet.add(chocolateChips);
+        
+        System.out.println("Items inserted into HashSet: flour, eggs, milk, chocolateChips");
 
-        System.out.println("HashSet Contents");
-        System.out.println(hashSet);
+        System.out.println("HashSet Contents:"
+                + itemCollection.ToString(hashSet));
+        
+        System.out.println("Attempting to add flour to list again.");
+        
+        if (hashSet.add(flour)) { //If add returns true.
+            System.out.println("Flour added");
+        }
+        else { //If add returns false.
+            System.out.println("Flour not added. Duplicate item.");
+        }
+        
+        System.out.println("HashSet Contents:"
+                + itemCollection.ToString(hashSet));
+        
         System.out.println();
     }
 
@@ -127,8 +160,9 @@ public class CollectionExamples {
         treeMap.put("milk", milk);
         treeMap.put("chocolate chips", chocolateChips);
 
-        System.out.println("TreeMap Contents");
-        System.out.println(treeMap);
+        System.out.println("TreeMap Contents:"
+                + itemCollection.ToString(treeMap));
+        
         System.out.println();
     }
 
@@ -142,8 +176,9 @@ public class CollectionExamples {
         hashMap.put("milk", milk);
         hashMap.put("chocolate chips", chocolateChips);
 
-        System.out.println("HashMap Contents");
-        System.out.println(hashMap);
+        System.out.println("HashMap Contents:"
+                + itemCollection.ToString(hashMap));
+        
         System.out.println();
     }
 }

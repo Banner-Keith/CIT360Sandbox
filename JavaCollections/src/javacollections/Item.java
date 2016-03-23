@@ -1,5 +1,6 @@
 package javacollections;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Item {
@@ -60,7 +61,7 @@ public class Item {
     public int getRecipeKey() {
         return recipeKey;
     }
-    
+
     public GroceryCategory getGroceryCategory() {
         return groceryCategory;
     }
@@ -84,7 +85,7 @@ public class Item {
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
-    
+
     public void setGroceryCategory(GroceryCategory groceryCategory) {
         this.groceryCategory = groceryCategory;
     }
