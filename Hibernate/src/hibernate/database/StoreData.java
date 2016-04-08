@@ -9,12 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 public class StoreData {
 
-    public static Map<Integer, Employee> employeeList = new HashMap<>();
-
-    public static void main(String[] args) {
-        StoreData storeData = new StoreData();
-        storeData.storeEmployeeData(100, "John", "Doe");
-    }
+    public Map<Integer, Employee> employeeList = new HashMap<>();
 
     public void storeEmployeeData(int id, String firstName, String lastName) {
 
